@@ -7,5 +7,7 @@ spring:
     password: 675FBADLQLRa
   jpa:
     show-sql: true
+  mail:
+    username: gwozdeckidaniel@gmail.com
 server:
   port: 8082
