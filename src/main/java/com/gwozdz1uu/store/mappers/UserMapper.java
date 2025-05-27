@@ -3,20 +3,20 @@ package com.gwozdz1uu.store.mappers;
 import com.gwozdz1uu.store.dtos.UserDto;
 import com.gwozdz1uu.store.entities.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    default UserDto toDto(User user) {
-        if (user == null) return null;
-
-        return new UserDto(
-                user.getId(),
-                user.getName(),
-                user.getEmail()
-        );
-    }
+//    default UserDto toDto(User user) {
+//        if (user == null) return null;
+//
+//        return new UserDto(
+//                user.getId(),
+//                user.getName(),
+//                user.getEmail()
+//        );
+//    }
+    UserDto toDto(User user);
 }
 
 
