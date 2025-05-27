@@ -1,6 +1,7 @@
 package com.gwozdz1uu.store.controllers;
 
 import com.gwozdz1uu.store.dtos.RegisterUserRequest;
+import com.gwozdz1uu.store.dtos.UpdateUserRequest;
 import com.gwozdz1uu.store.dtos.UserDto;
 import com.gwozdz1uu.store.mappers.UserMapper;
 import com.gwozdz1uu.store.repositories.UserRepository;
@@ -53,5 +54,31 @@ public class UserController {
         var userDto = userMapper.toDto(user);
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri() ;
         return ResponseEntity.created(uri).body(userDto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(
+            @PathVariable(name ="id") Long id,
+            @RequestBody UpdateUserRequest request) {
+        var user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        userMapper.updateEntity(request, user);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(userMapper.toDto(user));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        var user = userRepository.findById(id).orElse(null);
+        if(user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        userRepository.delete(user);
+        return ResponseEntity.noContent().build();
     }
 }

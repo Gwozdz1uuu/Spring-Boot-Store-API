@@ -1,9 +1,12 @@
 package com.gwozdz1uu.store.mappers;
 
 import com.gwozdz1uu.store.dtos.RegisterUserRequest;
+import com.gwozdz1uu.store.dtos.UpdateUserRequest;
 import com.gwozdz1uu.store.dtos.UserDto;
 import com.gwozdz1uu.store.entities.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
@@ -28,6 +31,7 @@ public interface UserMapper {
 //                request.getPassword()
 //        );
 //    }
+    void updateEntity(UpdateUserRequest request,@MappingTarget User user);
 }
 
 
