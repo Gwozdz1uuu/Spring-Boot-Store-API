@@ -1,6 +1,7 @@
 package com.gwozdz1uu.store.dtos;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
