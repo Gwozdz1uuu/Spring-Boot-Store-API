@@ -21,15 +21,11 @@ public interface UserMapper {
         );
     }
 //    UserDto toDto(User user);
-    User toEntity(RegisterUserRequest request);
+    User toEntity(RegisterUserRequest request); //to sie czesto psuje
 //    default User toEntity(RegisterUserRequest request) {
 //        if (request == null) return null;
 //
-//        return new User(
-//                request.getName(),
-//                request.getEmail(),
-//                request.getPassword()
-//        );
+//        return new User(request.getName(),request.getEmail(),request.getPassword());
 //    }
     void updateEntity(UpdateUserRequest request,@MappingTarget User user);
 }
