@@ -1,16 +1,21 @@
 package com.gwozdz1uu.store.controllers;
 
+import com.gwozdz1uu.store.dtos.AddItemToCartRequest;
 import com.gwozdz1uu.store.dtos.CartDto;
+import com.gwozdz1uu.store.dtos.CartItemDto;
 import com.gwozdz1uu.store.entities.Cart;
+import com.gwozdz1uu.store.entities.CartItem;
 import com.gwozdz1uu.store.mappers.CartMapper;
 import com.gwozdz1uu.store.repositories.CartRepository;
+import com.gwozdz1uu.store.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -19,6 +24,7 @@ public class CartController {
 
     private final CartRepository cartRepository;
     private final CartMapper cartMapper;
+    private final ProductRepository productRepository;
 
     @PostMapping
     public ResponseEntity<CartDto> createCart(
@@ -31,5 +37,42 @@ public class CartController {
         var uri = uriBuilder.path("/carts/{id}").buildAndExpand(cartDto.getId()).toUri();
 
         return ResponseEntity.created(uri).body(cartDto);
+    }
+
+    @PostMapping("/{cartId}/items")
+    public ResponseEntity<CartItemDto> addToCart(
+            @PathVariable UUID cartId,
+            @RequestBody AddItemToCartRequest request) {
+
+        var cart = cartRepository.findById(cartId).orElse(null);
+        if (cart == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var product = productRepository.findById(request.getProductId()).orElse(null);
+        if (product == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        var cartItem = cart.getCartItems().stream()
+                .filter(item -> item.getProduct().getId().equals(product.getId()))
+                .findFirst()
+                .orElse(null);
+        if (cartItem != null) {
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+        }
+        else  {
+            cartItem = new CartItem();
+            cartItem.setProduct(product);
+            cartItem.setQuantity(1);
+            cartItem.setCart(cart);
+            cart.getCartItems().add(cartItem);
+        }
+
+        cartRepository.save(cart);
+
+        var cartItemDto = cartMapper.toDto(cartItem);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartItemDto);
     }
 }
