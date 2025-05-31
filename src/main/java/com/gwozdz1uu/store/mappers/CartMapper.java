@@ -8,11 +8,11 @@ import com.gwozdz1uu.store.entities.CartItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.math.BigDecimal;
-
 @Mapper(componentModel = "spring", uses = {ProductMapper.class})
 public interface CartMapper {
     @Mapping(source="id", target = "id")
+    @Mapping(source= "items", target="items")
+    @Mapping(target="totalPrice",expression = "java(cart.getTotalPrice())")
     CartDto toDto(Cart cart);
 
 //    CartItemDto toDto(CartItem cartItem);
