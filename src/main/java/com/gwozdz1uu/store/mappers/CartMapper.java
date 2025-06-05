@@ -14,11 +14,10 @@ public interface CartMapper {
     @Mapping(source= "items", target="items")
     @Mapping(target="totalPrice",expression = "java(cart.getTotalPrice())")
     CartDto toDto(Cart cart);
-
 //    default CartDto toDto(Cart cart) {return new CartDto();}
+
+
 //    CartItemDto toDto(CartItem cartItem);
-
-
     default CartItemDto toDto(CartItem cartItem) {
         if (cartItem == null) {
             return null;
