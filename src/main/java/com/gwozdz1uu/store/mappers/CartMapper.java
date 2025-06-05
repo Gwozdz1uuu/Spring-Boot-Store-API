@@ -15,6 +15,7 @@ public interface CartMapper {
     @Mapping(target="totalPrice",expression = "java(cart.getTotalPrice())")
     CartDto toDto(Cart cart);
 
+//    default CartDto toDto(Cart cart) {return new CartDto();}
 //    CartItemDto toDto(CartItem cartItem);
 
 
