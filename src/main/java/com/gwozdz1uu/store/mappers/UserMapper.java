@@ -24,8 +24,8 @@ public interface UserMapper {
     User toEntity(RegisterUserRequest request); //to sie czesto psuje
 //    default User toEntity(RegisterUserRequest request) {
 //        if (request == null) return null;
-//
-//        return new User(request.getName(),request.getEmail(),request.getPassword());
+////
+//        return new User();
 //    }
     void updateEntity(UpdateUserRequest request,@MappingTarget User user);
 }
