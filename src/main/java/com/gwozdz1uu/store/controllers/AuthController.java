@@ -1,6 +1,9 @@
 package com.gwozdz1uu.store.controllers;
 
+import com.gwozdz1uu.store.dtos.JwtResponse;
 import com.gwozdz1uu.store.dtos.LoginRequest;
+import com.gwozdz1uu.store.services.JwtService;
+import io.jsonwebtoken.Jwt;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class AuthController {
     private final AuthenticationManager authenticationManager;
-
+    private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginRequest request){
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -26,7 +29,8 @@ public class AuthController {
                 )
         );
 
-        return ResponseEntity.ok().build();
+        var token = jwtService.generateToken(request.getEmail());
+        return ResponseEntity.ok(new JwtResponse(token));
     }
 
     @ExceptionHandler({BadCredentialsException.class})

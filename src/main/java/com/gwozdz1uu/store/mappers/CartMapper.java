@@ -13,7 +13,7 @@ public interface CartMapper {
     @Mapping(source="id", target = "id")
     @Mapping(source= "items", target="items")
     @Mapping(target="totalPrice",expression = "java(cart.getTotalPrice())")
-    CartDto toDto(Cart cart);
+    CartDto toDto(Cart cart); //to sie psuje
 //    default CartDto toDto(Cart cart) {return new CartDto();}
 
 

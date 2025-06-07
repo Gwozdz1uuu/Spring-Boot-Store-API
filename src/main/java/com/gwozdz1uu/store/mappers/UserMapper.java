@@ -20,14 +20,14 @@ public interface UserMapper {
                 user.getEmail()
         );
     }
-//    UserDto toDto(User user);
+    void updateEntity(UpdateUserRequest request,@MappingTarget User user);
+
+
+
     User toEntity(RegisterUserRequest request); //to sie czesto psuje
-//    default User toEntity(RegisterUserRequest request) {
-//        if (request == null) return null;
-////
+//    default User toEntity(RegisterUserRequest request) {if (request == null) return null;
 //        return new User();
 //    }
-    void updateEntity(UpdateUserRequest request,@MappingTarget User user);
 }
 
 

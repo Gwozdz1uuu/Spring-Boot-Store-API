@@ -26,8 +26,9 @@ public interface ProductMapper {
 
 
 
+
     @Mapping(target="id", ignore = true)
-    void updateProduct(ProductDto productDto,@MappingTarget Product product);
+    void updateProduct(ProductDto productDto,@MappingTarget Product product); //to sie psuje
 //    default void updateProduct(ProductDto productDto, Product product) {
 //    }
 }
