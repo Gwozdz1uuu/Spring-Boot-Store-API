@@ -1,9 +1,9 @@
 package com.gwozdz1uu.store.services;
 
+import com.gwozdz1uu.store.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,22 @@ public class JwtService {
     @Value("${spring.jwt.secret}")
     private String secret;
 
-    public String generateToken(String email) {
-        final long tokenExpiration = 86400;//1 dzien
+    public String generateAccessToken(User user) {
+        final long tokenExpiration = 300;// 5 min
 
+        return generateToken(user, tokenExpiration);
+    }
+
+    public String generateRefreshToken(User user) {
+        final long tokenExpiration = 604800;// 7 dni
+        return generateToken(user, tokenExpiration);
+    }
+
+    private String generateToken(User user, long tokenExpiration) {
         return Jwts.builder()
-                .subject(email)
+                .subject(user.getId().toString())
+                .claim("email", user.getEmail())
+                .claim("name", user.getName())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * tokenExpiration))
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
@@ -44,7 +55,7 @@ public class JwtService {
                 .getPayload();
     }
 
-    public String getEmailFromToken(String token) {
-        return getClaims(token).getSubject();
+    public Long getUserIdFromToken(String token) {
+        return Long.valueOf(getClaims(token).getSubject());
     }
 }

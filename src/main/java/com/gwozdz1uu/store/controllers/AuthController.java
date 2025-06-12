@@ -6,6 +6,8 @@ import com.gwozdz1uu.store.dtos.UserDto;
 import com.gwozdz1uu.store.mappers.UserMapper;
 import com.gwozdz1uu.store.repositories.UserRepository;
 import com.gwozdz1uu.store.services.JwtService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,9 @@ public class AuthController {
     private final UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest request){
+    public ResponseEntity<JwtResponse> login(
+            @RequestBody LoginRequest request,
+            HttpServletResponse response) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -33,8 +37,18 @@ public class AuthController {
                 )
         );
 
-        var token = jwtService.generateToken(request.getEmail());
-        return ResponseEntity.ok(new JwtResponse(token));
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        var accessToken = jwtService.generateAccessToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
+
+        var cookie = new Cookie("refreshToken", refreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/auth");
+        cookie.setMaxAge(604800); //7 dni
+        cookie.setSecure(true);
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok(new JwtResponse(accessToken));
     }
 
     @PostMapping("/validate")
@@ -49,9 +63,9 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<UserDto> me() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
-        var email = (String) authentication.getPrincipal();
+        var userId = (Long) authentication.getPrincipal();
 
-        var user = userRepository.findByEmail(email).orElse(null);
+        var user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
