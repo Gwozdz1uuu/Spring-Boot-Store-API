@@ -4,6 +4,7 @@ import com.gwozdz1uu.store.dtos.ChangePasswordRequest;
 import com.gwozdz1uu.store.dtos.RegisterUserRequest;
 import com.gwozdz1uu.store.dtos.UpdateUserRequest;
 import com.gwozdz1uu.store.dtos.UserDto;
+import com.gwozdz1uu.store.entities.Role;
 import com.gwozdz1uu.store.mappers.UserMapper;
 import com.gwozdz1uu.store.repositories.UserRepository;
 import jakarta.validation.Valid;
@@ -63,6 +64,7 @@ public class UserController {
 
         var user = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
 
         var userDto = userMapper.toDto(user);
