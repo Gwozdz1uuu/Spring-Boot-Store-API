@@ -1,5 +1,6 @@
 package com.gwozdz1uu.store.config;
 
+import com.gwozdz1uu.store.entities.Role;
 import com.gwozdz1uu.store.filters.JwtAuthenticationFilter;
 import com.gwozdz1uu.store.services.JwtService;
 import lombok.AllArgsConstructor;
@@ -61,14 +62,18 @@ public class SecurityConfig {
 //                                .requestMatchers(HttpMethod.GET).permitAll()
 //                                .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/carts/**").permitAll()
+                                .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
                                 .anyRequest().authenticated()
                         )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling(c->
-                        c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+                .exceptionHandling(c-> {
+                    c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                    c.accessDeniedHandler((request, response, accessDeniedException) ->
+                            response.setStatus(HttpStatus.FORBIDDEN.value()));
+                        });
 
         return http.build();
     }
