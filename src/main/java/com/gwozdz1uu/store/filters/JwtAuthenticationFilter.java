@@ -1,6 +1,5 @@
 package com.gwozdz1uu.store.filters;
 
-import com.gwozdz1uu.store.entities.Role;
 import com.gwozdz1uu.store.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -31,17 +30,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         var token = authHeader.replace("Bearer ", "");
-        if(!jwtService.validateToken(token)) {
+        var jwt = jwtService.parseToken(token);
+        if(jwt == null || jwt.isExpired()) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        var role = jwtService.getRoleFromToken(token);
-        var userId = jwtService.getUserIdFromToken(token);
         var authentication = new UsernamePasswordAuthenticationToken(
-                userId,
+                jwt.getUserId(),
                 null,
-                List.of(new SimpleGrantedAuthority("ROLE_" + role))
+                List.of(new SimpleGrantedAuthority("ROLE_" + jwt.getRole()))
         );
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
