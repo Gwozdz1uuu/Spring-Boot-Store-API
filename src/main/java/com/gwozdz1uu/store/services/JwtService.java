@@ -1,7 +1,6 @@
 package com.gwozdz1uu.store.services;
 
 import com.gwozdz1uu.store.config.JwtConfig;
-import com.gwozdz1uu.store.entities.Role;
 import com.gwozdz1uu.store.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

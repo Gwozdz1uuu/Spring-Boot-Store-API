@@ -11,7 +11,7 @@ spring:
     username: gwozdeckidaniel@gmail.com
   jwt:
     secret: ${JWT_SECRET}
-    accessTokenExpiration: 900 #5 min
+    accessTokenExpiration: 7200 #2 godz
     refreshTokenExpiration: 604800 # 7 dni
 server:
   port: 8082
