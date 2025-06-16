@@ -1,4 +1,4 @@
-package com.gwozdz1uu.store.services;
+package com.gwozdz1uu.store.payments;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

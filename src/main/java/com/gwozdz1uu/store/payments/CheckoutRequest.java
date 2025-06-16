@@ -1,4 +1,4 @@
-package com.gwozdz1uu.store.dtos;
+package com.gwozdz1uu.store.payments;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

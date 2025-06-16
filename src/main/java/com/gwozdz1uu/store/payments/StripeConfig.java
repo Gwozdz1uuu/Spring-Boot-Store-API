@@ -1,4 +1,4 @@
-package com.gwozdz1uu.store.config;
+package com.gwozdz1uu.store.payments;
 
 import com.stripe.Stripe;
 import jakarta.annotation.PostConstruct;

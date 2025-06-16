@@ -1,12 +1,8 @@
 package com.gwozdz1uu.store.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.mapstruct.EnumMapping;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -29,7 +25,7 @@ public class Order {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private PaymentStatus status;
 
 
     @Column(name = "created_at",insertable = false, updatable = false   )
@@ -45,7 +41,7 @@ public class Order {
         var order = new Order();
         order.setCustomer(customer);
         order.setTotalPrice(cart.getTotalPrice());
-        order.setStatus(OrderStatus.PENDING);
+        order.setStatus(PaymentStatus.PENDING);
 
 
         cart.getItems().forEach(item -> {

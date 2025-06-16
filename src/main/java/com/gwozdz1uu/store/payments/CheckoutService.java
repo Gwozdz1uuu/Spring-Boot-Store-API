@@ -1,13 +1,12 @@
-package com.gwozdz1uu.store.services;
+package com.gwozdz1uu.store.payments;
 
-import com.gwozdz1uu.store.dtos.CheckoutRequest;
-import com.gwozdz1uu.store.dtos.CheckoutResponse;
 import com.gwozdz1uu.store.entities.Order;
 import com.gwozdz1uu.store.exceptions.CartEmptyException;
 import com.gwozdz1uu.store.exceptions.CartNotFoundException;
-import com.gwozdz1uu.store.exceptions.PaymentException;
 import com.gwozdz1uu.store.repositories.CartRepository;
 import com.gwozdz1uu.store.repositories.OrderRepository;
+import com.gwozdz1uu.store.services.AuthService;
+import com.gwozdz1uu.store.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,5 +47,15 @@ public class CheckoutService {
             orderRepository.delete(order);
             throw e;
         }
+    }
+
+    public void handleWebhookEvent(WebhookRequest request){
+        paymentGateway
+                .parseWebhookRequest(request)
+                .ifPresent(paymentResult -> {
+                    var order = orderRepository.findById(paymentResult.getOrderId()).orElseThrow();
+                    order.setStatus(paymentResult.getPaymentStatus());
+                    orderRepository.save(order);
+                });
     }
 }

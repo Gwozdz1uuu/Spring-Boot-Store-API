@@ -1,7 +1,5 @@
-package com.gwozdz1uu.store.dtos;
+package com.gwozdz1uu.store.payments;
 
-import com.gwozdz1uu.store.entities.Order;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
