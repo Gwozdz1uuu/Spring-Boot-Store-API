@@ -1,6 +1,6 @@
 package com.gwozdz1uu.store.payments;
 
-import com.gwozdz1uu.store.entities.Order;
+import com.gwozdz1uu.store.orders.Order;
 
 import java.util.Optional;
 

@@ -1,10 +1,10 @@
 package com.gwozdz1uu.store.mappers;
 
-import com.gwozdz1uu.store.dtos.CartDto;
-import com.gwozdz1uu.store.dtos.CartItemDto;
-import com.gwozdz1uu.store.dtos.CartProductDto;
-import com.gwozdz1uu.store.entities.Cart;
-import com.gwozdz1uu.store.entities.CartItem;
+import com.gwozdz1uu.store.carts.CartDto;
+import com.gwozdz1uu.store.carts.CartItemDto;
+import com.gwozdz1uu.store.carts.CartProductDto;
+import com.gwozdz1uu.store.carts.Cart;
+import com.gwozdz1uu.store.carts.CartItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

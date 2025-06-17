@@ -1,8 +1,8 @@
 package com.gwozdz1uu.store.payments;
 
-import com.gwozdz1uu.store.entities.Order;
-import com.gwozdz1uu.store.entities.OrderItem;
-import com.gwozdz1uu.store.entities.PaymentStatus;
+import com.gwozdz1uu.store.orders.Order;
+import com.gwozdz1uu.store.orders.OrderItem;
+import com.gwozdz1uu.store.orders.PaymentStatus;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Event;

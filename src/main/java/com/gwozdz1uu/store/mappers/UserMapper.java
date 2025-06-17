@@ -1,11 +1,10 @@
 package com.gwozdz1uu.store.mappers;
 
-import com.gwozdz1uu.store.dtos.RegisterUserRequest;
-import com.gwozdz1uu.store.dtos.UpdateUserRequest;
-import com.gwozdz1uu.store.dtos.UserDto;
-import com.gwozdz1uu.store.entities.User;
+import com.gwozdz1uu.store.users.RegisterUserRequest;
+import com.gwozdz1uu.store.users.UpdateUserRequest;
+import com.gwozdz1uu.store.users.UserDto;
+import com.gwozdz1uu.store.users.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")

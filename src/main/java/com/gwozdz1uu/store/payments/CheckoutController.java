@@ -1,9 +1,9 @@
 package com.gwozdz1uu.store.payments;
 
-import com.gwozdz1uu.store.dtos.ErrorDto;
-import com.gwozdz1uu.store.exceptions.CartEmptyException;
-import com.gwozdz1uu.store.exceptions.CartNotFoundException;
-import com.gwozdz1uu.store.repositories.OrderRepository;
+import com.gwozdz1uu.store.common.ErrorDto;
+import com.gwozdz1uu.store.carts.CartEmptyException;
+import com.gwozdz1uu.store.carts.CartNotFoundException;
+import com.gwozdz1uu.store.orders.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

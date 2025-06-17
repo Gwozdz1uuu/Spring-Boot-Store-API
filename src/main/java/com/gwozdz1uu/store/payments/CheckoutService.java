@@ -1,12 +1,12 @@
 package com.gwozdz1uu.store.payments;
 
-import com.gwozdz1uu.store.entities.Order;
-import com.gwozdz1uu.store.exceptions.CartEmptyException;
-import com.gwozdz1uu.store.exceptions.CartNotFoundException;
-import com.gwozdz1uu.store.repositories.CartRepository;
-import com.gwozdz1uu.store.repositories.OrderRepository;
-import com.gwozdz1uu.store.services.AuthService;
-import com.gwozdz1uu.store.services.CartService;
+import com.gwozdz1uu.store.orders.Order;
+import com.gwozdz1uu.store.carts.CartEmptyException;
+import com.gwozdz1uu.store.carts.CartNotFoundException;
+import com.gwozdz1uu.store.carts.CartRepository;
+import com.gwozdz1uu.store.orders.OrderRepository;
+import com.gwozdz1uu.store.auth.AuthService;
+import com.gwozdz1uu.store.carts.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

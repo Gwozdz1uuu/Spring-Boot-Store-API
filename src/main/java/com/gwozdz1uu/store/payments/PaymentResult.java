@@ -1,6 +1,6 @@
 package com.gwozdz1uu.store.payments;
 
-import com.gwozdz1uu.store.entities.PaymentStatus;
+import com.gwozdz1uu.store.orders.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

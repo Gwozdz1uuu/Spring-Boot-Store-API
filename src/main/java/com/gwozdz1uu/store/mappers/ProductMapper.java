@@ -1,11 +1,10 @@
 package com.gwozdz1uu.store.mappers;
 
-import com.gwozdz1uu.store.dtos.ProductDto;
-import com.gwozdz1uu.store.entities.Product;
+import com.gwozdz1uu.store.products.ProductDto;
+import com.gwozdz1uu.store.products.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel="spring")
 public interface ProductMapper {
