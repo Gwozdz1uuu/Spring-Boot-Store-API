@@ -23,10 +23,18 @@ public interface UserMapper {
 
 
 
-    User toEntity(RegisterUserRequest request); //to sie czesto psuje
-//    default User toEntity(RegisterUserRequest request) {if (request == null) return null;
-//        return new User();
-//    }
+//    User toEntity(RegisterUserRequest request); //to sie czesto psuje
+    default User toEntity(RegisterUserRequest request) {
+        if (request == null) return null;
+
+        User.UserBuilder user = User.builder();
+
+        user.name( request.getName() );
+        user.email( request.getEmail() );
+        user.password( request.getPassword() );
+
+        return user.build();
+    }
 }
 
 

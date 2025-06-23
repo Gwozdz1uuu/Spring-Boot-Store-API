@@ -1,21 +1,12 @@
 spring:
   application:
     name: store
-  datasource:
-    url: jdbc:mysql://localhost:3306/store_api?createDatabaseIfNotExist=true
-    username: root
-    password: 675FBADLQLRa
-  jpa:
-    show-sql: true
-  mail:
-    username: gwozdeckidaniel@gmail.com
   jwt:
     secret: ${JWT_SECRET}
     accessTokenExpiration: 7200 #2 godz
     refreshTokenExpiration: 604800 # 7 dni
-server:
-  port: 8082
+  profiles:
+    active: dev
 stripe:
   secretKey: ${STRIPE_SECRET_KEY}
   webhookSecretKey: ${STRIPE_WEBHOOK_SECRET_KEY}
-websiteUrl: http://localhost:4242
