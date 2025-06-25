@@ -6,14 +6,10 @@
 
 # SPRING_BOOT_API
 
-<em>Transform Ideas Into Seamless Digital Experiences</em>
-
 <!-- BADGES -->
 <img src="https://img.shields.io/github/last-commit/Gwozdz1uuu/Spring-Boot-Store-API?style=flat&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 <img src="https://img.shields.io/github/languages/top/Gwozdz1uuu/Spring-Boot-Store-API?style=flat&color=0080ff" alt="repo-top-language">
 <img src="https://img.shields.io/github/languages/count/Gwozdz1uuu/Spring-Boot-Store-API?style=flat&color=0080ff" alt="repo-language-count">
-
-<em>Built with the tools and technologies:</em>
 
 <img src="https://img.shields.io/badge/Markdown-000000.svg?style=flat&logo=Markdown&logoColor=white" alt="Markdown">
 <img src="https://img.shields.io/badge/Spring-000000.svg?style=flat&logo=Spring&logoColor=white" alt="Spring">
@@ -24,10 +20,21 @@
 <br>
 
 ---
+# PL
 
-## ✨ Overview
+Spring-Boot_Store-API interfejs (API) imitujący działającego sklepu online. 
+Kluczowe elementy w projekcie:
+- **Spring Boot:** java framework 
+- **Spring Security**
+- **Stripe:** symulacja płatności za pomocą stripe.
+- **Swagger:** dokumentacja
+- **Railway:** projekt udostepniony publicznie (API, baza danych).
 
-Spring-Boot-Store-API is a backend framework built on Spring Boot. It integrates essential components such as data persistence, security, and API documentation, enabling development and third-party integrations like Stripe.
+# ENG, more info
+
+## Overview
+
+Spring-Boot-Store-API is a backend framework built on Spring Boot. Essential components such as data persistence, security, and API documentation, enabling development and third-party integrations like Stripe.
 
 **Why Store API?**
 
@@ -41,7 +48,7 @@ A project for creating secure and easy-to-maintain e-commerce web services.. The
 
 ---
 
-## 📌 Features
+## Features
 
 |      | Component            | Details                                                                                     |
 | :--- | :------------------- | :------------------------------------------------------------------------------------------ |
@@ -58,72 +65,55 @@ A project for creating secure and easy-to-maintain e-commerce web services.. The
 
 ---
 
-## 📁 Simple Project Structure
+## Simple Project Structure
 
 ```sh
 └── Spring_boot_api
         └── src/main/java/com.gwozdz1uu.store
-            ├── admin
-            ├── auth
-            ├── carts
-            ├── common
-            ├── mappers
-            ├── orders
-            ├── payments
-            ├── products
-            └── users
+            ├── admin – Admin-only endpoints.
+            ├── auth – JWT authentication (token generation, filters, login endpoints).
+            ├── carts – Shopping cart logic and API endpoints.
+            ├── common – Global config, security rules, error handling.
+            ├── mappers – DTO ↔ Entity conversion helpers.
+            ├── orders – Order entities, DTOs, services, and controllers.
+            ├── payments – Stripe-based payment processing.
+            ├── products – Product/category data and REST access.
+            └── users  – User profiles, registration, password changes, and roles.
         └── src/main/resources/db.migration
             ├── V1__initial_migration.sql
             (...)
             └── V5__populate_database.sql
 
+        resources:
+                application.yaml – Base configuration.
+                application-dev.yaml – Dev-specific config.
+                application-prod.yaml – Prod-specific config.
+
 ```
 
----
 
-## 📁 More Precise Project Structure Overview
 
-<details open>
-<summary><code><b>SPRING_BOOT_API/</b></code></summary>
+### 🧪 Testing
 
-### 📄 Key Files
-- **`pom.xml`** – Project dependencies and build setup.
-- **`README.md`** – Project documentation.
-- **`script.sql`** – Initial database schema.
+Via Postman requests, collections and custom environments such as Dev for local tests and Prod for public server tests.
+**[Postman workspace](https://gwozdz1uu.postman.co/workspace/Gwozdz1uu's-Workspace~7045a552-b019-4ec7-8e4e-532e1f39c492/collection/45221523-1906c44e-ac11-4843-babb-dbb8faf74ad8?action=share&creator=45221523&active-environment=45221523-628a6941-32cf-4bad-9255-25ad8882c59e)**
 
-### 📁 `src/`
-#### 🔹 `main/`
-- **`java/com/gwozdz1uu/store`**
-  - `StoreApplication.java` – App entry point.
-  - **`auth/`** – JWT authentication (token generation, filters, login endpoints).
-  - **`users/`** – User profiles, registration, password changes, and roles.
-  - **`orders/`** – Order entities, DTOs, services, and controllers.
-  - **`carts/`** – Shopping cart logic and API endpoints.
-  - **`products/`** – Product/category data and REST access.
-  - **`payments/`** – Stripe-based payment processing.
-  - **`admin/`** – Admin-only endpoints.
-  - **`mappers/`** – DTO ↔ Entity conversion helpers.
-  - **`common/`** – Global config, security rules, error handling.
+### 🚅 Deployment
+Project is deployed on railway.com platform. Includes backend spring rest-API and MySQL already populated database.
 
-- **`resources/`**
-  - `application.yaml` – Base configuration.
-  - `application-dev.yaml` – Dev-specific config.
-  - `application-prod.yaml` – Prod-specific config.
-</details>
-
+### 📄 Documentation
+**[Swagger documentation](https://store-api-production-56da.up.railway.app/swagger-ui/index.html)**
 
 ---
 
-## 🚀 Getting Started
-
-### 📋 Prerequisites
+## Getting Started
 
 This project requires the following dependencies:
 
 - **Programming Language:** Java
 - **Package Manager:** Maven
 
-### ⚙️ Installation
+### Installation
 
 Build Spring_boot_api from the source and install dependencies:
 
@@ -146,16 +136,6 @@ Build Spring_boot_api from the source and install dependencies:
 ```sh
 ❯ mvn install
 ```
-### 🧪 Testing
-
-Via Postman requests, collections and custom environments such as Dev for local tests and Prod for public server tests.
-**[Postman workspace](https://gwozdz1uu.postman.co/workspace/Gwozdz1uu's-Workspace~7045a552-b019-4ec7-8e4e-532e1f39c492/collection/45221523-1906c44e-ac11-4843-babb-dbb8faf74ad8?action=share&creator=45221523&active-environment=45221523-628a6941-32cf-4bad-9255-25ad8882c59e)**
-
-### 🚅 Deployment
-Project is deployed on railway.com platform. Includes backend spring rest-API and MySQL already populated database.
-
-### 📄 Documentation
-**[Swagger documentation](https://store-api-production-56da.up.railway.app/swagger-ui/index.html)**
 
 
 <div align="left"><a href="#top">⬆ Return</a></div>
